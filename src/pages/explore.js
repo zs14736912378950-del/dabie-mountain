@@ -302,7 +302,6 @@ export function init(container) {
   var html = '<div class="page" id="explore-page">';
   // \u9876\u90e8\u5bfc\u822a\u680f\uff1a\u5de6\u8fd4\u56de(#6) | \u6807\u9898\u5c45\u4e2d
   html += '<div class="top-nav">';
-  html += '<button class="top-nav-back" id="explore-back" aria-label="\u8fd4\u56de\u9996\u9875">\ud83c\udfe0</button>';
   html += '<span class="top-nav-title">\ud83c\udf32 \u7b2c\u4e00\u7ae0 \u00b7 \u68ee\u6797\u63a2\u7d22</span>';
   html += '<div style="width:34px;"></div>'; // \u5360\u4f4d
   html += '</div>';
