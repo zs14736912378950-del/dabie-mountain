@@ -162,18 +162,19 @@ html, body {
    Explore — Discovery Counter (floating)
    ============================================ */
 .explore-counter {
-  position: absolute;
-  top: max(var(--space-sm), env(safe-area-inset-top));
-  right: var(--space-md);
-  margin-top: 44px; /* 留出 top-nav 高度 */
-  background: rgba(255,255,255,0.88);
+  position: fixed;
+  top: 50px;
+  right: 16px;
+  background: rgba(255,255,255,0.92);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-full);
-  padding: 5px 14px;
-  font-size: 12px; font-weight: 600;
+  padding: 6px 14px;
+  font-size: 13px; font-weight: 600;
   color: var(--color-text);
-  z-index: 101;
-  box-shadow: var(--shadow-sm);
+  z-index: 2000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  cursor: default;
+  pointer-events: none;
   display: flex; align-items: center; gap: 4px;
 }
 
