@@ -483,19 +483,19 @@ function showEcologyCard(container) {
 function updateCounter(container){var c=container.querySelector("#disc-count");if(c)c.textContent=discoveredSpecies.size;}
 
 function showToast(container,message){
-  // 先移除已有的 toast
-  var existing=container.querySelector(".explore-toast");
-  if(existing) existing.remove();
-  // 也清理 document.body 上的旧 toast
+  // 清理旧 toast
   document.querySelectorAll(".explore-toast").forEach(function(t){ t.remove(); });
 
+  // 创建顶部横幅
   var toast=document.createElement("div");
   toast.className="explore-toast";
-  toast.style.cssText="position:fixed;top:90px;left:50%;transform:translateX(-50%);background:rgba(44,36,22,0.92);color:#fff;padding:12px 24px;border-radius:24px;font-size:14px;font-weight:600;z-index:9999;pointer-events:none;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,0.3);backdrop-filter:blur(8px);letter-spacing:0.3px;";
-  toast.textContent=message;
-  document.body.appendChild(toast); // 添加到 body 而非 container，避免被清理
-  gsap.fromTo(toast,{opacity:0,y:-10,scale:0.9},{opacity:1,y:0,scale:1,duration:0.3,ease:"back.out(1.4)"});
-  gsap.to(toast,{opacity:0,y:-10,duration:0.3,delay:3,onComplete:function(){toast.remove();}});
+  toast.style.cssText="position:fixed;top:0;left:0;right:0;z-index:9999;pointer-events:none;";
+  toast.innerHTML='<div style="background:linear-gradient(135deg,#059669,#10B981);color:#fff;padding:14px 20px;font-size:15px;font-weight:700;text-align:center;box-shadow:0 4px 20px rgba(5,150,105,0.3);">'+message+'</div>';
+  document.body.appendChild(toast);
+  // 从顶部滑入
+  gsap.fromTo(toast.querySelector("div"),{y:-60},{y:0,duration:0.4,ease:"back.out(1.2)"});
+  // 3秒后滑出消失
+  gsap.to(toast.querySelector("div"),{y:-60,duration:0.3,delay:3,ease:"power2.in",onComplete:function(){toast.remove();}});
 }
 
 function spawnExploreParticles(container){
