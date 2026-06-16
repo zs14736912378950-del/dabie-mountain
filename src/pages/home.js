@@ -29,7 +29,7 @@ export function init(container) {
       <div class="home-particles" id="home-particles"></div>
 
       <!-- 内容层 -->
-      <div class="home-content" id="home-content" style="opacity:0;">
+      <div class="home-content" id="home-content">
         <div class="home-logo" id="home-logo">🌲</div>
         <h1 class="home-title" id="home-title">大别山生态密码</h1>
         <p class="home-subtitle">潜入安徽大别山的原始森林，探索奇妙物种，解开食物链谜题，成为真正的生态守护者</p>
@@ -53,52 +53,15 @@ export function init(container) {
   };
   imgPreload.src = bgImgUrl;
 
-  // === 电影级 Intro Timeline ===
-  const tl = gsap.timeline({ delay: 0.3 });
-
-  // 0-1s: 黑色遮罩淡出 + 模糊消除
-  tl.to(mask, { opacity: 0, duration: 1, ease: "power2.out" }, 0);
-  tl.fromTo(container.querySelector(".home-page"),
-    { filter: "blur(8px)" },
-    { filter: "blur(0px)", duration: 1, ease: "power2.out" },
-    0
-  );
-
-  // 1-2s: 背景缩放推进 + 云层漂散
-  tl.to(bgImg, { scale: 1, duration: 1.2, ease: "power2.out" }, 0.5);
-  tl.set(bgImg, { scale: 1.12 }, 0);
-  // 生成 5 个半透明白色椭圆从中心漂散
-  for (let i = 0; i < 5; i++) {
-    const cloud = document.createElement("div");
-    const angle = (i / 5) * Math.PI * 2;
-    const size = 60 + Math.random() * 80;
-    cloud.style.cssText = `position:absolute;top:50%;left:50%;width:${size}px;height:${size * 0.5}px;background:rgba(255,255,255,0.15);border-radius:50%;transform:translate(-50%,-50%);filter:blur(20px);`;
-    cloudBox.appendChild(cloud);
-    tl.to(cloud, {
-      x: Math.cos(angle) * (200 + Math.random() * 150),
-      y: Math.sin(angle) * (150 + Math.random() * 100),
-      opacity: 0,
-      duration: 1.5,
-      ease: "power2.out"
-    }, 0.8);
-  }
-
-  // 2-3.5s: 内容容器激活 + 子元素依次淡入
-  tl.set("#home-content", { opacity: 1 }, 1.95);
-  tl.from(".home-logo", { y: -40, opacity: 0, duration: 0.7, ease: "back.out(1.4)" }, 2.0);
-  tl.from(".home-title", { y: 30, opacity: 0, duration: 0.6, ease: "power3.out" }, 2.2);
-  tl.from(".home-subtitle", { y: 20, opacity: 0, duration: 0.5, ease: "power3.out" }, 2.4);
-  tl.from(".home-start-btn", { y: 20, opacity: 0, scale: 0.9, duration: 0.6, ease: "back.out(1.3)" }, 2.6);
-  tl.from(".home-geo-btn", { y: 15, opacity: 0, duration: 0.4, ease: "power2.out" }, 2.8);
-
-  // 3.5s 后：移除遮罩，允许交互
-  tl.call(function() {
+  // 简单开场：遮罩淡出
+  gsap.to(mask, { opacity: 0, duration: 0.8, ease: "power2.out" });
+  setTimeout(function() {
     mask.style.pointerEvents = "none";
     mask.style.display = "none";
-  }, [], 3.2);
+  }, 800);
 
   // 背景缓慢漂移（intro 结束后）
-  gsap.to(".home-bg", {
+  gsap.to(container.querySelector(".home-bg"), {
     backgroundPosition: "0% 6%",
     duration: 12,
     repeat: -1,
@@ -132,7 +95,7 @@ export function init(container) {
       playClick();
       stopParticles();
       hideGuide();
-      gsap.to(".home-content", {
+      gsap.to(contentEl, {
         opacity: 0, scale: 0.95, y: -10,
         duration: 0.35, ease: "power2.in",
         onComplete: function() { navigateTo("explore"); }
@@ -148,7 +111,7 @@ export function init(container) {
       playClick();
       stopParticles();
       hideGuide();
-      gsap.to(".home-content", {
+      gsap.to(contentEl, {
         opacity: 0, scale: 0.95, y: -10,
         duration: 0.35, ease: "power2.in",
         onComplete: function() { navigateTo("explore"); }
@@ -226,8 +189,8 @@ export function destroy() {
   stopParticles();
   hideGuide();
   clearTimeout(_titleClickTimer);
-  gsap.killTweensOf(".home-content");
-  gsap.killTweensOf(".home-bg");
+  gsap.killTweensOf("#home-content");
+  gsap.killTweensOf("#home-bg");
   gsap.killTweensOf("#home-particles span");
   document.querySelectorAll("#cloud-particles div").forEach(el => el.remove());
 }

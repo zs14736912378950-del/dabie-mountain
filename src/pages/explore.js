@@ -43,8 +43,7 @@ let _scene = null;
 let _leafTimer = null;
 let discoveredSpecies = new Set();
 const totalSpecies = hotspots.length;
-let _lastMoveX = 0, _lastMoveTime = 0; // 惯性滚动用
-let _treeClickCount = 0, _treeClickTimer = null, _squirrelFound = false; // 彩蛋
+let _treeClickCount = 0, _treeClickTimer = null, _squirrelFound = false;
 
 // ===== SVG 层（gradient ID 带层前缀避免冲突） =====
 function renderSkyLayer(sw) {
@@ -365,49 +364,29 @@ export function init(container) {
   _leafTimer = setInterval(spawnLeaf, 2000);
 
   _onDragStart = function(e) {
-    if(dragging)return;
-    if(e.target.closest(".hotspot")||e.target.closest(".knowledge-card"))return;
-    if(e.type==="mousedown"&&e.button!==0)return;
-    dragging=true;startX=e.touches?e.touches[0].clientX:e.clientX;startOffset=offsetX;
-    scene.style.cursor="grabbing";
+    if(dragging) return;
+    if(e.target.closest(".hotspot") || e.target.closest(".knowledge-card")) return;
+    if(e.type==="mousedown" && e.button!==0) return;
+    dragging = true;
+    startX = e.touches ? e.touches[0].clientX : e.clientX;
+    startOffset = offsetX;
+    scene.style.cursor = "grabbing";
   };
 
   _onDragMove = function(e) {
-    if(!dragging)return;
-    var cx=e.touches?e.touches[0].clientX:e.clientX;
-    var now = Date.now();
-    var dt = now - _lastMoveTime;
-    if (dt > 0) {
-      _lastMoveX = (cx - _lastMoveX) / dt * 16; // velocity per frame
-    }
-    _lastMoveX = cx;
-    _lastMoveTime = now;
-    offsetX=Math.max(-maxOffset,Math.min(0,startOffset+(cx-startX)));
-    layerEls.forEach(function(el,i){el.style.transform="translateX("+(offsetX*parallaxSpeeds[i])+"px)";});
-    if(hotspotsEl)hotspotsEl.style.transform="translateX("+(offsetX*parallaxSpeeds[3])+"px)";
+    if(!dragging) return;
+    var cx = e.touches ? e.touches[0].clientX : e.clientX;
+    offsetX = Math.max(-maxOffset, Math.min(0, startOffset + (cx - startX)));
+    layerEls.forEach(function(el, i) {
+      el.style.transform = "translateX(" + (offsetX * parallaxSpeeds[i]) + "px)";
+    });
+    if(hotspotsEl) hotspotsEl.style.transform = "translateX(" + (offsetX * parallaxSpeeds[3]) + "px)";
   };
 
   _onDragEnd = function() {
-    if(!dragging)return;
-    dragging=false;scene.style.cursor="grab";
-    if(guideEl&&guideEl.style.opacity!=="0.3")gsap.to(guideEl,{opacity:0.3,duration:1,delay:2});
-    // 惯性滚动
-    var velocity = _lastMoveX * 8;
-    if (Math.abs(velocity) > 5) {
-      var targetOffset = Math.max(-maxOffset, Math.min(0, offsetX + velocity));
-      gsap.to({v: offsetX}, {
-        v: targetOffset,
-        duration: 0.8,
-        ease: "power1.out",
-        onUpdate: function() {
-          var cur = this.targets()[0].v;
-          layerEls.forEach(function(el,i){el.style.transform="translateX("+(cur*parallaxSpeeds[i])+"px)";});
-          if(hotspotsEl)hotspotsEl.style.transform="translateX("+(cur*parallaxSpeeds[3])+"px)";
-        },
-        onComplete: function() { offsetX = targetOffset; }
-      });
-    }
-    _lastMoveX = 0; _lastMoveTime = 0;
+    if(!dragging) return;
+    dragging = false;
+    scene.style.cursor = "grab";
   };
 
   scene.addEventListener("mousedown",_onDragStart);
@@ -644,12 +623,10 @@ export function destroy(){
   if(_scene){
     _scene.removeEventListener("mousedown",_onDragStart);
     _scene.removeEventListener("touchstart",_onDragStart);
-    _scene.removeEventListener("touchmove",_onDragMove);
-    _scene.removeEventListener("touchend",_onDragEnd);
   }
-  if(_onDragMove)window.removeEventListener("mousemove",_onDragMove);
-  if(_onDragMove)window.removeEventListener("touchmove",_onDragMove);
-  if(_onDragEnd)window.removeEventListener("mouseup",_onDragEnd);
-  if(_onDragEnd)window.removeEventListener("touchend",_onDragEnd);
+  window.removeEventListener("mousemove",_onDragMove);
+  window.removeEventListener("touchmove",_onDragMove);
+  window.removeEventListener("mouseup",_onDragEnd);
+  window.removeEventListener("touchend",_onDragEnd);
   _onDragStart=null;_onDragMove=null;_onDragEnd=null;_scene=null;offsetX=0;dragging=false;discoveredSpecies=new Set();
 }
