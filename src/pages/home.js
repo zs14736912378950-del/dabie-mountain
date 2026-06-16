@@ -83,8 +83,8 @@ export function init(container) {
     }, 0.8);
   }
 
-  // 2-3.5s: 内容依次淡入上浮
-  tl.to("#home-content", { opacity: 1, duration: 0.01 }, 2.0);
+  // 2-3.5s: 内容容器激活 + 子元素依次淡入
+  tl.set("#home-content", { opacity: 1 }, 1.95);
   tl.from(".home-logo", { y: -40, opacity: 0, duration: 0.7, ease: "back.out(1.4)" }, 2.0);
   tl.from(".home-title", { y: 30, opacity: 0, duration: 0.6, ease: "power3.out" }, 2.2);
   tl.from(".home-subtitle", { y: 20, opacity: 0, duration: 0.5, ease: "power3.out" }, 2.4);
