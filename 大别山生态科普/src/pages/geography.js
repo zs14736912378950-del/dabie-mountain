@@ -185,17 +185,23 @@ export function init(container) {
   gsap.from(".geo-section", { opacity: 0, y: 15, duration: 0.4, stagger: 0.1, delay: 0.2, ease: "power2.out" });
 
   // 返回首页按钮 (#6)
-  container.querySelector("#geo-back").addEventListener("click", function() {
-    playClick();
-    navigateTo("home");
-  });
+  var backBtn = container.querySelector("#geo-back");
+  if (backBtn) {
+    backBtn.addEventListener("click", function() {
+      playClick();
+      navigateTo("home");
+    });
+  }
 
   // 下一章按钮
-  container.querySelector("#geo-next-btn").addEventListener("click", function() {
-    playClick();
-    unlockChapter(2);
-    navigateTo("explore");
-  });
+  var nextBtn = container.querySelector("#geo-next-btn");
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function() {
+      playClick();
+      unlockChapter(2);
+      navigateTo("explore");
+    });
+  }
 }
 
 // 绘制生物多样性柱状图 (#11) — 使用柱状图避免标签重叠
