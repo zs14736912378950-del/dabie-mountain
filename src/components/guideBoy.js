@@ -1,34 +1,8 @@
 // 小男孩引导角色 — 每个页面左下角的交互引导
 import gsap from "gsap";
 
-// 小男孩 SVG 形象
-const boySVG = `<svg width="64" height="80" viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- 身体 -->
-  <rect x="18" y="36" width="28" height="28" rx="6" fill="#4FC3F7"/>
-  <!-- 胳膊 -->
-  <rect x="10" y="38" width="10" height="6" rx="3" fill="#FFCC80"/>
-  <rect x="44" y="38" width="10" height="6" rx="3" fill="#FFCC80"/>
-  <!-- 腿 -->
-  <rect x="22" y="62" width="8" height="14" rx="4" fill="#5C6BC0"/>
-  <rect x="34" y="62" width="8" height="14" rx="4" fill="#5C6BC0"/>
-  <!-- 鞋 -->
-  <rect x="20" y="72" width="12" height="6" rx="3" fill="#5D4037"/>
-  <rect x="32" y="72" width="12" height="6" rx="3" fill="#5D4037"/>
-  <!-- 头 -->
-  <circle cx="32" cy="24" r="18" fill="#FFCC80"/>
-  <!-- 头发 -->
-  <path d="M14 18 Q16 6 32 8 Q48 6 50 18 Q50 12 42 10 Q32 6 22 10 Q14 12 14 18Z" fill="#5D4037"/>
-  <!-- 眼睛 -->
-  <circle cx="25" cy="24" r="3" fill="#333"/>
-  <circle cx="39" cy="24" r="3" fill="#333"/>
-  <circle cx="26" cy="23" r="1" fill="#fff"/>
-  <circle cx="40" cy="23" r="1" fill="#fff"/>
-  <!-- 嘴巴（微笑） -->
-  <path d="M26 32 Q32 38 38 32" stroke="#E57373" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- 腮红 -->
-  <circle cx="18" cy="30" r="3" fill="#FFAB91" opacity="0.5"/>
-  <circle cx="46" cy="30" r="3" fill="#FFAB91" opacity="0.5"/>
-</svg>`;
+// Q版小林 emoji 形象
+const boySVG = `<div style="font-size:56px;line-height:1;">🧑‍🌾</div>`;
 
 // 各页面的引导内容
 const guideMessages = {

@@ -4,7 +4,7 @@
    ============================================ */
 
 :root {
-  /* === 主色调（自然绿色系 — 推荐 palette） === */
+  /* === 主色调（自然绿色系） === */
   --color-primary: #059669;
   --color-primary-light: #10B981;
   --color-primary-mid: #34D399;
@@ -20,7 +20,7 @@
   --color-surface: #ffffff;
   --color-surface-hover: #F0FDF4;
 
-  /* === 文字（对比度 7:1+ 达标） === */
+  /* === 文字 === */
   --color-text: #064E3B;
   --color-text-secondary: #047857;
   --color-text-muted: #6B7280;
@@ -954,6 +954,7 @@ html, body {
   flex: 1; display: flex; flex-direction: column;
   padding: var(--space-md); padding-bottom: 70px;
   gap: var(--space-md); overflow-y: auto;
+  max-width: 600px; margin: 0 auto; width: 100%;
 }
 
 .puzzle-source {
@@ -1084,6 +1085,7 @@ html, body {
   flex: 1; display: flex; flex-direction: column;
   overflow-y: auto; padding-bottom: 70px;
   background: var(--color-bg-warm);
+  max-width: 600px; margin: 0 auto; width: 100%;
 }
 
 /* 场景插图容器 */
@@ -1424,7 +1426,7 @@ button,
   transition: transform 0.2s;
 }
 .guide-boy-avatar:hover { transform: scale(1.08); }
-.guide-boy-avatar svg { width: 100%; height: 100%; }
+.guide-boy-avatar svg, .guide-boy-avatar > div { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 
 .guide-bubble {
   position: relative;
@@ -1729,6 +1731,7 @@ button,
   flex: 1; display: flex; flex-direction: column;
   padding: var(--space-md); padding-bottom: 70px;
   gap: var(--space-md); overflow-y: auto;
+  max-width: 600px; margin: 0 auto; width: 100%;
 }
 .quiz-progress {
   text-align: center; font-size: 13px;
