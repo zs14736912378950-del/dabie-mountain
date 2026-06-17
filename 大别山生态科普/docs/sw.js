@@ -1,29 +1,29 @@
 // 大别山生态密码 — Service Worker (#9 PWA离线支持)
 const CACHE_NAME = 'dabie-mountain-v1';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/images/home-bg.jpeg',
-  '/images/species/pinus.jpg',
-  '/images/species/rhododendron.jpg',
-  '/images/species/ginkgo.jpg',
-  '/images/species/dendrobium.jpg',
-  '/images/species/goldenpheasant.jpg',
-  '/images/species/salamander.jpg',
-  '/images/species/pheasant.jpg',
-  '/images/species/eagle.webp',
-  '/images/species/muskdeer.jpg',
-  '/images/species/pangolin.webp',
-  '/images/species/butterfly.webp',
-  '/images/species/tianinv.jpg',
-  '/images/species/lingzhi.jpg',
-  '/images/species/huamei.jpg',
-  '/images/species/bailu.jpg',
-  '/images/species/mihou.jpg',
-  '/images/species/zhonghua_mifeng.jpg',
-  '/images/species/chilianshe.jpg',
-  '/images/species/dabie-mountain-peak.jpg'
+  '/dabie-mountain/',
+  '/dabie-mountain/index.html',
+  '/dabie-mountain/manifest.json',
+  '/dabie-mountain/images/home-bg.jpeg',
+  '/dabie-mountain/images/species/pinus.jpg',
+  '/dabie-mountain/images/species/rhododendron.jpg',
+  '/dabie-mountain/images/species/ginkgo.jpg',
+  '/dabie-mountain/images/species/dendrobium.jpg',
+  '/dabie-mountain/images/species/goldenpheasant.jpg',
+  '/dabie-mountain/images/species/salamander.jpg',
+  '/dabie-mountain/images/species/pheasant.jpg',
+  '/dabie-mountain/images/species/eagle.webp',
+  '/dabie-mountain/images/species/muskdeer.jpg',
+  '/dabie-mountain/images/species/pangolin.webp',
+  '/dabie-mountain/images/species/butterfly.webp',
+  '/dabie-mountain/images/species/tianinv.jpg',
+  '/dabie-mountain/images/species/lingzhi.jpg',
+  '/dabie-mountain/images/species/huamei.jpg',
+  '/dabie-mountain/images/species/bailu.jpg',
+  '/dabie-mountain/images/species/mihou.jpg',
+  '/dabie-mountain/images/species/zhonghua_mifeng.jpg',
+  '/dabie-mountain/images/species/chilianshe.jpg',
+  '/dabie-mountain/images/species/dabie-mountain-peak.jpg'
 ];
 
 // 安装：预缓存关键静态资源
@@ -73,7 +73,7 @@ self.addEventListener('fetch', event => {
       }).catch(() => {
         // 离线时返回离线页面（如果请求的是HTML）
         if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('/index.html');
+          return caches.match('/dabie-mountain/index.html');
         }
       });
     })
