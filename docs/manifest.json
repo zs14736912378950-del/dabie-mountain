@@ -1,0 +1,19 @@
+{
+  "name": "大别山生态密码",
+  "short_name": "生态密码",
+  "description": "探索安徽大别山森林生态系统的互动科普H5，发现珍稀物种，解开食物链谜题，成为生态守护者！",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0fdf4",
+  "theme_color": "#2d5a27",
+  "orientation": "portrait",
+  "categories": ["education", "entertainment"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
